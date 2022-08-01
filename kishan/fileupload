@@ -1,0 +1,18 @@
+//     $target_dir = "image/";
+    
+//     $target_file = $target_dir.basename($_FILES["photo"]["name"]);
+    
+//     $uploadok = 1;
+    
+//     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    
+//     $check =getimagesize($_FILES["photo"]["tmp_name"]);
+// //    print_r($check);
+// //     echo die();
+//     if($check!== false){
+//         echo "file is an image".$check["mime"].".";
+//         $uploadok = 1;
+//     }else{
+//        echo "upload is not done";
+//        $uploadok = 0;
+//     }  

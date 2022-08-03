@@ -20,38 +20,26 @@ if(isset($_POST['submit'])){
     
     if($name ==""){
         $error_name = "<span class='error'>Please enter your name</span>";
-    }else{
-        $name;
     }
-    if($email ==""){
+    elseif($email ==""){
         $error_email = "<span class='error'>Please enter your email</span>";
     }
     elseif(!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i",$email)){
         $error_email = "<span class='error'>Please enter valid email</span>";
-    }else{
-        $email;
     }
-    if($DOB ==""){
+    elseif($DOB ==""){
         $error_DOB = "<span class='error'>Please enter your date of birth</span>";
-    }else{
-        $DOB;
     }
-    if($gender ==""){
+    elseif($gender ==""){
         $error_gender = "<span class='error'>choose your gender</span>";
-    }else{
-        $gender;
     }
-    if($photo =="default"){
+    elseif($photo =="default"){
         $error_photo = "<span class='error'>please enter your photo</span>";
-    }else{
-        $photo;
     }
-    if($password ==""){
+    elseif($password ==""){
         $error_name = "<span class='error'>Please enter your password</span>";
-    }else{
-         $password;
     }
-    if($ConfirmPass ==""){
+    elseif($ConfirmPass ==""){
         $error_ConfirmPass = "<span class='error'>Please enter your name</span>";
     }
     elseif($password !=$ConfirmPass){
@@ -61,38 +49,25 @@ if(isset($_POST['submit'])){
         
    
     if($_FILES['photo']['name']){
-        $extension = array("jpeg,jpg,png");
-        $file_size = $_FILES["photo"]["size"];
-        // echo $file_size;
-        // die();
-        if($file_size>1000000){
-            echo "image valid";
-        }else{
-            echo "image not valid";
-        }
-        
-        move_uploaded_file($_FILES['photo']['tmp_name'],$extension,"image/".$_FILES['photo']['name']);
+        move_uploaded_file($_FILES['photo']['tmp_name'],"image/".$_FILES['photo']['name']);
+
+        // echo "Not uploaded because of error #".$_FILES["photo"]["error"];
 
         $check = "image/".$_FILES['photo']['name'];
     } else {
         echo "Not uploaded because of error #".$_FILES["photo"]["error"];
     }
-        $email_check = mysqli_query($con,"SELECT * FROM users WHERE email = '$email'");
-       if(mysqli_num_rows($email_check)>0)
-       {
-        echo '<script>alert("email already in use")</script>';
-       }else{
-        
+    
         $insert = "insert into users(name,email,password,DOB,gender,photo) values ('$name','$email','$password','$DOB','$gender','$check')";
-        
+    // echo $i;
+    // echo die();
     if(mysqli_query($con,$insert)){
         echo "record inserted sucessfully";
-        header("Location:signin.php");
+        header("Location:datatables.php");
     }else{
         echo "record not inserted";
     }
-   } 
-}   
+   }    
 }
 ?>
 
@@ -112,7 +87,7 @@ if(isset($_POST['submit'])){
     <title>Sign Up Form</title>
 </head>
 
-<body style="background-color:#c5e9ff;">
+<body style="background-color:#ecfab6;">
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card card-outline-secondary">
@@ -120,36 +95,32 @@ if(isset($_POST['submit'])){
                     <h3 class="mb-1">Sign Up Form</h3>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="" enctype="multipart/form-data" id="signupForm" class="signup-form">
+                    <form method="post" action="" enctype="multipart/form-data" id="signupForm">
                         <div class="form-group row">
-                            <label for="name" class="col-lg-2 col-form-label form-control-label"
-                                style="text-align:center; padding:15px">name</label>
+                            <label for="name" class="col-lg-2 col-form-label form-control-label">name:</label>
                             <div class="col-lg-9">
                                 <input type="text" name="name" placeholder="enter your name" class="input" id="name">
                                 <?php echo $error_name;?>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email" class="col-lg-2 col-form-label form-control-label"
-                                style="text-align:center; padding:14px">email</label>
+                            <label for="email" class="col-lg-2 col-form-label form-control-label">email:</label>
                             <div class="col-lg-9">
                                 <input type="email" name="email" placeholder="enter your email address" class="input">
                                 <?php echo $error_email;?>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password" class="col-lg-2 col-form-label form-control-label"
-                                style="text-align:center; padding:20px">pwd</label>
+                            <label for="password" class="col-lg-2 col-form-label form-control-label">pwd:</label>
                             <div class="col-lg-9">
                                 <input type="password" name="password" placeholder="enter your password" class="input"
                                     onKeyUp="checkPasswordStrength();" id="password" />
                                 <?php echo $error_password;?>
-                                <div id="password-strength-status" style="color:red;"></div>
+                                <div id="password-strength-status"></div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password" class="col-lg-2 col-form-label form-control-label"
-                                style="text-align:center; padding-top:14px"> c.pwd</label>
+                            <label for="password" class="col-lg-2 col-form-label form-control-label"> c.pwd:</label>
                             <div class="col-lg-9">
                                 <input type="password" name="Cpassword" placeholder="enter your password" class="input"
                                     id="Cpassword">
@@ -158,16 +129,14 @@ if(isset($_POST['submit'])){
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="dob" class="col-lg-2 col-form-label form-control-label"
-                                style="text-align:center; padding:20px">DOB</label>
+                            <label for="dob" class="col-lg-2 col-form-label form-control-label">DOB:</label>
                             <div class="col-lg-9">
                                 <input type="date" name="DOB" placeholder="enter your date of birth" class="input">
                                 <?php echo $error_DOB;?>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="gender" class="col-lg-2 col-form-label form-control-label"
-                                style="text-align:center; padding-left:0px">gender</label>
+                            <label for="gender" class="col-lg-2 col-form-label form-control-label">gender</label>
                             <div class="col-lg-9">
                                 <select name="gender" id="gender">
                                     <option value="">Choose Gender</option>
@@ -178,18 +147,15 @@ if(isset($_POST['submit'])){
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="photo" class="col-lg-2 col-form-label form-control-label"
-                                style="text-align:center; padding-left:5px">photo</label>
+                            <label for="photo" class="col-lg-2 col-form-label form-control-label">photo</label>
                             <div class="col-lg-9">
-                                <input type="file" name="photo" class="input" accept="image/png, image/jpg, image/jpeg"
-                                    id="photo" onchange="imagePreview(this);">
-                                <div id="preview"></div>
+                                <input type="file" name="photo" class="input" accept="image/png, image/jpg, image/jpeg">
                                 <?php echo $error_photo;?>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-lg-9">
-                                <input type="submit" name="submit" value="submit" class="form-submit">
+                                <input type="submit" name="submit" value="submit" class="btn btn-dark">
                             </div>
                         </div>
                     </form>
@@ -202,10 +168,9 @@ if(isset($_POST['submit'])){
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.js"></script>
 
-    <script type="text/javascript">
-    function checkPasswordStrength() { //unique password function
+    <script>
+    function checkPasswordStrength() {
         var number = /([0-9])/;
         var alphabets = /([a-zA-Z])/;
         var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
@@ -228,21 +193,6 @@ if(isset($_POST['submit'])){
         }
     }
 
-    //image preview fumction   
-    function imagePreview(fileInput) {
-
-        if (fileInput.files && fileInput.files[0]) {
-            var fileReader = new FileReader();
-            console.log(fileReader);
-            fileReader.onload = function(event) {
-                $('#preview').html('<img src = "' + event.target.result + '"width="200" height ="200"/>');
-            };
-            fileReader.readAsDataURL(fileInput.files[0]);
-        }
-    }
-
-    //password and confirm passssword match function
-
     $(document).ready(function() {
         $("#Cpassword").on('keyup', function() {
             var password = $("#password").val();
@@ -255,7 +205,7 @@ if(isset($_POST['submit'])){
             }
         });
     });
-    //minimum age function
+
     $.validator.addMethod("minAge", function(value, element, min) {
         var today = new Date();
         var birthDate = new Date(value);
@@ -274,33 +224,12 @@ if(isset($_POST['submit'])){
         return age >= min;
     }, "You must be at least 18 year!");
 
-    //max age function in js
-    $.validator.addMethod("maxAge", function(value, element, max) {
-        var today = new Date();
-        var birthDate = new Date(value);
-        var age = today.getFullYear() - birthDate.getFullYear();
-
-        if (age < max + 1) {
-            return true;
-        }
-
-        var m = today.getMonth() - birthDate.getMonth();
-
-        if (m > 0 || (m === 0 && today.getDate() > birthDate.getDate())) {
-            age++;
-        }
-
-        return age <= max;
-    }, "your age should be max up to 50 year!");
-
     $(document).ready(function() {
-
         $("#signupForm").validate({
             rules: {
                 name: {
                     required: true,
-                    minlength: 3,
-                    maxlength: 64
+                    minlength: 3
                 },
                 email: {
                     required: true,
@@ -314,8 +243,7 @@ if(isset($_POST['submit'])){
                 },
                 DOB: {
                     required: true,
-                    minAge: 18,
-                    maxAge: 50
+                    minAge: 18
                 },
                 gender: {
                     required: true,
@@ -328,8 +256,7 @@ if(isset($_POST['submit'])){
             },
             message: {
                 name: {
-                    minlength: "Name should be at least 3 Character",
-                    maxlength: "name should be max up to 64"
+                    minlength: "Name should be at least 3 Character"
                 },
                 email: {
                     email: "email should be format :abc@domain.tld"
@@ -337,8 +264,7 @@ if(isset($_POST['submit'])){
 
                 DOB: {
                     required: "enter your birthdate",
-                    minAge: "You must be at least 18 year",
-                    maxAge: "Your age is max up to 50 year"
+                    minAge: "You must be at least 18 year"
                 },
                 photo: {
                     required: "please upload file",

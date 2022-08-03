@@ -1,0 +1,35 @@
+h3{
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+}
+td,th{
+    border: 1px solid #dddddd;
+    text-align: center;
+}
+table{
+    border-spacing: 5px;
+}
+
+
+ul{
+    height: 50px;
+    padding: 0px 5px;
+    width: auto;
+    float: right;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+ul li{
+    list-style: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+}
+
+#myUl li a{
+    text-decoration: none;
+}
+

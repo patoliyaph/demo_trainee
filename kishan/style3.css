@@ -1,7 +1,6 @@
 body {
 	margin: 0;
 	color: #ecfab6;
-  
 }
 
 #scroll-to-top {
@@ -29,7 +28,3 @@ body {
 .input[type=email]{
   margin-right: 30px;
 }
-
-.error{
-  color: red !important;
- }

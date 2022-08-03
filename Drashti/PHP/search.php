@@ -38,8 +38,7 @@ include 'database.php';
 			<td><?php echo $data['email'];?></td>
             <td><?php echo $data['dob'];?></td>
 			<td><?php echo $data['gender'];?></td>
-			<td><img src="upload/<?php  echo $data['image'];?>" width="100" height="100"></td>
-            
+			<td><img src="upload/<?php  echo $data['image'];?>" width="100" height="100"></td>        
 		</tr>
         </tbody>
             

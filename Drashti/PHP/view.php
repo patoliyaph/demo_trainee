@@ -37,11 +37,18 @@
    <title>View Data</title>
    <meta charset="utf-8">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
    <link rel="stylesheet" type="text/css" href="css/style.css">
    <script>
      function selectId() {
        var length = document.getElementById("length").value;
        var search = document.getElementById("search").value;
+       var hidField = document.getElementById("hidField").value;
+      //  sort thi value get kari but sort namni id kya ?????
+      // ID vagar data na aave etle code break thay
+      // Samjanu ???
+       var sort = document.getElementById("sort").value;
+
        var query = '';
        if (length) {  
         query = query + '&length=' + length;
@@ -49,12 +56,23 @@
        if (search) {
         query = query + '&search=' + search;
        }
+       if(hidField){
+        query = query + '&hidField=' + hidField;
+       }
+       if(sort){
+        query = query + '&sort=' + sort;
+       }
        location.href = 'view.php?' + query;
      }
      function myFunction() {
        var id = alert("Are You Sure Delete Record..!!");
        location.href = 'delete.php?id=' + id;
      }
+     $(document).ready(function() {
+      $("#hidField").keyup(function() {
+        alert($(this).val());
+      });
+    })
    </script>
  </head>
  <body>
@@ -72,23 +90,24 @@
                  <a href="register.php" class="btn btn-info">Add</a>
                  <a href="logout.php" class="btn btn-secondary">Logout</a>
                </div>
-               <label>show <select onchange="selectId()" name="length" id="length">
+               <label>show <select onchange="selectId()"  name="length" id="length">
                    <option value="5" <?php if ($length == 5) echo "selected"; ?>>5</option>
                    <option value="10" <?php if ($length == 10) echo "selected"; ?>>10</option>
                    <option value="20" <?php if ($length == 20) echo "selected"; ?>>20</option>
                    <option value="50" <?php if ($length == 50) echo "selected"; ?>>50</option>
                  </select> entries</label>
                <div>
-                 <table class="table table-striped ">
+               <input type="hidden"  id="hidField" value="<?php echo $_GET['sort'] ?? ''; ?>">
+                 <table class="table table-striped">
                    <thead>
                      <tr>
-                       <th><a href="<?php echo sortorder('id'); ?>" class="sort">ID</a></th>
-                       <th><a href="<?php echo sortorder('name'); ?>" class="sort">Name</a></th>
-                       <th><a href="<?php echo sortorder('email'); ?>" class="sort">Email</a></th>
-                       <th><a href="<?php echo sortorder('dob'); ?>" class="sort">DOB</a></th>
-                       <th><a href="<?php echo sortorder('gender'); ?>" class="sort">Gender</a></th>
-                       <th><a href="<?php echo sortorder('image'); ?>" class="sort">Image</a></th>
-                       <th><a href="<?php echo sortorder('action'); ?>" class="sort" >Action</th>
+                       <th><a href="<?php echo sortorder('id'); ?>" id="sort" class="sort">ID</a></th>
+                       <th><a href="<?php echo sortorder('name'); ?>" id="sort" class="sort">Name</a></th>
+                       <th><a href="<?php echo sortorder('email'); ?>" id="sort" class="sort">Email</a></th>
+                       <th><a href="<?php echo sortorder('dob'); ?>" id="sort" class="sort">DOB</a></th>
+                       <th><a href="<?php echo sortorder('gender'); ?>" id="sort" class="sort">Gender</a></th>
+                       <th><a href="<?php echo sortorder('image'); ?>" id="sort" class="sort">Image</a></th>
+                       <th><a href="<?php echo sortorder('action'); ?>" id="sort" class="sort" >Action</a></th>
                      </tr>
                    </thead>
                    <tbody id="table">
@@ -99,10 +118,10 @@
                        }
                       $value = $search;
                       if ($search) {
-                        echo $query = "SELECT * FROM register  WHERE CONCAT(id,name,email,gender) like '%$value%'  LIMIT $start_from,$num_per_page";
+                        $query = "SELECT * FROM register  WHERE CONCAT(id,name,email,gender) like '%$value%' LIMIT $start_from,$num_per_page";
                         $sql = mysqli_query($conn, $query);
                       } else {
-                        echo $query = "SELECT * FROM register $orderby LIMIT  $start_from,$num_per_page";
+                        $query = "SELECT * FROM register $orderby LIMIT  $start_from,$num_per_page";
                         $sql = mysqli_query($conn, $query);
                       }
                       ?>

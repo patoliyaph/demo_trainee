@@ -3,14 +3,6 @@ body {
   color: #ecfab6;
 }
 
-/* Scroll to Top */
-#scroll-to-top {
-  cursor: pointer;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: none;
-}
 
 .col-md-4 {
   padding-top: 100px;
@@ -44,12 +36,10 @@ display-flex,
 .form-row,
 .add-info-link {
   display: flex;
-  display: -webkit-flex;
 }
 
-/* @extend list-type-ulli; */
-list-type-ulli,
-ul {
+
+list-type-ulli,ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -113,44 +103,16 @@ a {
   background: #fff;
 }
 
-.signup-content {
-  padding: 10px 0;
-}
+/* .signup-content {
+  padding: 5px 0;
+} */
 
 .signup-form {
   padding: 58px 50px 0px 50px;
   height: 652px;
-  overflow-y: auto;
 }
 
-.signup-form::-webkit-scrollbar-track {
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  background-color: #f8f8f8;
-  width: 10px;
-}
 
-.signup-form::-webkit-scrollbar {
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  width: 10px;
-  background-color: #fff;
-}
-
-.signup-form::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  background-color: #ebebeb;
-}
 
 label,
 input {
@@ -384,36 +346,38 @@ li.init:after {
   font-weight: 400;
 }
 
-.form-submit {
+/* .form-submit {
   width: auto;
   background: #1da0f2;
   color: #fff;
   text-transform: uppercase;
   font-weight: 900;
-  padding: 16px 50px;
+  padding: 12px 50px;
   float: right;
   border: none;
-  margin-top: 37px;
   cursor: pointer;
+  margin-right: 45px;
+  margin-bottom: 18px;
 }
 
 .form-submit:hover {
   background: #0c85d0;
-}
+} */
 
 label.error {
-  display: block;
+  display: inline-block;
   position: absolute;
-  top: 51px;
+  top: 70px;
   left: 130px;
+  font-size: small;
 }
 
 label.error:after {
   font-family: 'Material-Design-Iconic-Font';
   position: absolute;
   content: '\f135';
-  /* right: 31px; */
-  /* top: 40px; */
+  /* right: 31px;
+  top: 40px; */
   font-size: 10px;
   color: #c70000;
 }
@@ -449,7 +413,7 @@ input.error {
   }
 }
 
-/*# sourceMappingURL=style.css.map */
+
 
 label,
 input {
@@ -469,11 +433,12 @@ label {
   color: #fff;
   text-transform: uppercase;
   font-weight: 900;
-  padding: 16px 50px;
-  float: right;
+  padding: 15px;
+  align-items: center;
   border: none;
-  margin-top: 37px;
+  margin: -10px;
   cursor: pointer;
+  
 }
 
 .form-submit:hover {
@@ -485,5 +450,5 @@ label {
   padding-right: 50px;
   padding-bottom: 0px;
   padding-left: 50px;
-  height: 652px;
+  height: 700px;
 }

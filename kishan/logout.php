@@ -1,6 +1,8 @@
 <?php
 session_start();
-unset($_SESSION["email"]);
-unset($_SESSION["password"]);
+if (!isset($_SESSION['email'])) {
+    header("Location:signin.php");
+}
+session_destroy();
 header("Location:signin.php");
-?>
+exit();

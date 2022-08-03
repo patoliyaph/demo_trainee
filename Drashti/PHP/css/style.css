@@ -1,0 +1,21 @@
+my-5 {
+    margin-top: 2rem!important;
+    margin-bottom: 8rem!important;
+}
+card{
+   position:relative;
+   display: flex;
+   flex-direction:column-reverse;
+   min-width: 10rem;
+}
+body {
+   margin: 0;
+   font-family: math;
+   font-size: 1rem;
+   font-weight: 800;
+   line-height: 1.5;
+   color: #212529;
+   text-align: -webkit-match-parent;
+   background-color: lightgrey;
+}
+

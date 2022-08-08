@@ -6,9 +6,9 @@
 input[type="text"],
 input[type="password"] {
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   /* margin: 5px 0 22px 0; */
-  margin: 22px 0 22px 0;
+  margin: 6px 0 14px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
@@ -32,21 +32,25 @@ hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
+#log {
+  text-align: right;
+}
 
 a {
   /* border: 1px solid #fdf8f8; */
   margin: 1px;
   padding: 10px;
+  /* color: white;r */
   /* background-color: grey; */
   text-decoration: none;
 }
 a:hover {
   text-decoration: none;
 }
-th {
+/* th {
   background-color: #a1a1a1;
   text-decoration: none;
-}
+} */
 
 /* .sign {
   display: inline-block;
@@ -57,25 +61,19 @@ th {
   color: white;
   font-weight: 600;
 } */
-
-.create {
+.btn-common {
   display: inline-block;
   padding: 10px 30px;
-  background-color:  #3fa942;;
+  background-color: rgb(151 161 68);
   border-radius: 10px;
   border: none;
   color: white;
   font-weight: 600;
+  right: 10px;
 }
 
 .acreate {
-  display: inline-block;
-  padding: 10px 30px;
   background-color: #eb240a;
-  border-radius: 10px;
-  border: none;
-  color: white;
-  font-weight: 600;
 }
 /* Set a style for all buttons */
 button {
@@ -94,10 +92,10 @@ button:hover {
 }
 
 /* Extra styles for the cancel button */
-.cancelbtn {
+/* .cancelbtn {
   padding: 14px 20px;
   background-color: #f44336;
-}
+} */
 
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn,
@@ -120,13 +118,14 @@ button:hover {
   display: table;
 }
 
-.delete-btn {
+/* .delete-btn {
   background-color: red;
   color: white;
   border: 0;
   padding: 4px 10px;
   border-radius: 35px;
   cursor: pointer;
+  height: 30px;
 }
 .edit-btn {
   background-color: green;
@@ -135,15 +134,15 @@ button:hover {
   padding: 4px 10px;
   border-radius: 35px;
   cursor: pointer;
-}
-.view-btn {
+} */
+/* .view-btn {
   background-color: rgb(123, 151, 202);
   color: white;
   border: 0;
   padding: 4px 10px;
   border-radius: 35px;
   cursor: pointer;
-}
+} */
 #modal {
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
@@ -171,7 +170,7 @@ button:hover {
   padding-bottom: 10px;
   border-bottom: 1px solid;
 }
-
+/* 
 #close-btn {
   background: red;
   color: white;
@@ -184,7 +183,7 @@ button:hover {
   top: -15px;
   right: -15px;
   cursor: pointer;
-}
+} */
 h3 {
   margin: 5px;
   color: #0b0b0a;
@@ -328,7 +327,7 @@ form.example input[type="text"] {
   border-radius: 3px;
 } */
 #pagination a.active {
-  background: #27ae60;
+  background: #020202;
 }
 .form-img {
   height: 100%;
@@ -357,9 +356,9 @@ form.example input[type="text"] {
   text-align: center;
   color: #ccc;
 }
-button {
+/* button {
   height: 50px;
-}
+} */
 .sideline:before,
 .sideline:after {
   content: "";
@@ -376,7 +375,21 @@ button {
   min-height: 100vh;
   align-items: center;
 }
-.signup-form{
+.signup-form {
   box-shadow: 2px 2px 20px #00000047;
-  padding: 20px;
+  padding: 11px 60px;
+}
+.view-form {
+  box-shadow: 2px 2px 20px #00000047;
+  padding: 50px 50px;
+}
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.demo-table thead a{
+color: white;
+}
+.row {
+
+   margin-top: 35px;
 }

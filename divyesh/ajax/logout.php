@@ -1,6 +1,13 @@
 <?php
 
 session_start();
-session_destroy();
+$des = session_destroy();
 
-header("Location:signin.php");
+if ($des) {
+    echo '<script type="text/javascript">';
+    echo ' alert("logout successfully")';
+    echo '</script>';
+    echo '<script>
+    window.location.href = "signin.php";
+    </script>';
+}

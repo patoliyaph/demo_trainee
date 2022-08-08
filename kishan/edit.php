@@ -1,18 +1,10 @@
 <?php
 session_start();
 include 'config.php';
-if (!isset($_SESSION["email"])) {
-    header("location:signin.php");
-}
-
-$id = session_id();
-$email = $_SESSION["email"];
-
-if (!isset($id)) {
-    echo "user not found";
-} elseif (!isset($_SESSION["email"])) {
-    header("location:signin.php");
-}
+if(!$_SESSION["email"]){
+    header("Location:signin.php");
+ }
+include 'helper.php';
 
 ?>
 <?php
@@ -115,6 +107,7 @@ if (isset($_POST['update'])) {
                 <div class="card-header">
                     <h3 class="mb-1">Update Form</h3>
                 </div>
+                
                 <div class="card-body">
                     <div class="signupFrm">
                         <form method="post" enctype="multipart/form-data" action="" id="updateForm">
@@ -183,6 +176,7 @@ if (isset($_POST['update'])) {
                                 <div class="col-lg-9">
                                     <input type="submit" name="update" class="btn btn-dark">
                                 </div>
+                               
                             </div>
                         </form>
                     </div>

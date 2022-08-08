@@ -2,7 +2,10 @@
 
 session_start();
 include 'config.php';
-
+include 'helper.php';
+if(!$_SESSION["email"]){
+    header("Location:signin.php");
+ }
 $id = $_GET['id'];
 $result = mysqli_query($con, "SELECT * FROM users where id= $id");
 

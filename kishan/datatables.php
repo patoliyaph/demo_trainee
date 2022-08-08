@@ -1,14 +1,10 @@
 <?php
 include 'config.php';
 session_start();
-$id = session_id();
-$email = $_SESSION["email"];
-
-if (!isset($id)) {
-    echo "user not found";
-} elseif (!isset($_SESSION["email"])) {
-    header("location:signin.php");
+if(!$_SESSION["email"]){
+   header("Location:signin.php");
 }
+include 'helper.php';
 
 
 
@@ -18,6 +14,7 @@ $result = mysqli_query($con, "SELECT*FROM users");
 if ($_SESSION["email"]) {
 ?>
     welcome <?php echo $_SESSION["email"]; ?>.click herer to <a href="logout.php" title="Logout" class="btn btn-warning ms-2">Logout.</a>
+    <a href="change_password.php" class="btn btn-warning ms-2">change password</a>
 <?php
 } else {
     "<h1>Please login first.<h1>";
@@ -80,8 +77,10 @@ if ($_SESSION["email"]) {
                                             <button class="btn btn-outline-warning"><?php echo '<a href="view.php?id=' . $row['id'] . '" style="text-decoration:none;"/>' ?>view</button>
                                             <button class="btn btn-outline-warning"><?php echo '<a href="edit.php?id=' . $row['id'] . '" style="text-decoration:none;"/>' ?>edit</button>
                                             <button class="btn btn-outline-warning" onclick="return confirm('Are you want to delete?')"><?php echo '<a href="delete.php?id=' . $row['id'] . '" style="text-decoration:none;"/>' ?>delete</button>
+                                          
                                         </td>
                                     </tr>
+                                    
                                 <?php
                                 }
                                 ?>

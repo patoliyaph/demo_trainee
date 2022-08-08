@@ -1,5 +1,10 @@
 <?php
 include 'database.php';
+session_start();
+if (!isset($_SESSION['email'])) 
+      {
+        header("location:login.php");
+      } 
 $id = $_GET['id'];
 $query = "SELECT * FROM register WHERE id=$id";
 $sql = mysqli_query($conn, $query);

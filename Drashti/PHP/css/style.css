@@ -18,4 +18,9 @@ body {
    text-align: -webkit-match-parent;
    background-color: lightgrey;
 }
-
+form-input img{
+   width: 100px;
+   height: 100px;
+   display: none;
+   margin-top: 10px;
+}

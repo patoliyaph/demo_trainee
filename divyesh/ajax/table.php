@@ -7,7 +7,7 @@ include 'config.php';
 $search_value = $_POST["search"];
 $colname = $_POST["colname"];
 $type = $_POST["type"];
-$DESC = DESC;
+$DESC = "DESC";
 $limit_per_page = $_POST['length'] ?? 5;
 
 $page = "";
@@ -18,7 +18,6 @@ if (isset($_POST["page"])) {
 }
 $offset = ($page - 1) * $limit_per_page;
 $list = $_POST["length"];
-// $page = $_POST["page"];
 
 $sql = "SELECT * FROM user_data ";
 
@@ -38,8 +37,9 @@ $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 $output = "";
 
 if (mysqli_num_rows($result) > 0) {
-    $output = '<table border="1" width="100%" cellspacing="0" cellpadding="10px">
+    $output = '<table class=" demo-table table table-striped" border="1" width="100%" cellspacing="0" cellpadding="10px">
    <tr>
+   <thead class="thead-dark">
    <th><a class="column_sort" id="user_id"  href="load.php?sort=user_id&type=asc">ID</a></th>
    <th><a class="column_sort" id="user_name"  href="load.php?sort=user_name&type=asc">Name</a></th>
    <th><a class="column_sort" id="user_email" href="load.php?sort=user_email&type=asc">email</a></th>
@@ -49,6 +49,7 @@ if (mysqli_num_rows($result) > 0) {
    <th><a class="column_sort" id="View" >View</a></th>
    <th><a class="column_sort" id="Edit" >Edit</a></th>
    <th><a class="column_sort" id="Delete">Delete</a></th>
+   </thead>
    </tr>';
 
     while ($row = mysqli_fetch_assoc($result)) {
@@ -58,9 +59,9 @@ if (mysqli_num_rows($result) > 0) {
          <td>{$row["user_dob"]}</td>
          <td>{$row["user_gender"]}</td>
          <td><img src=" . $row['user_photo'] . " width='100px' ></td>
-         <td><a href='view.php?id={$row["user_id"]}' class='view-btn' >View</a></td>
-         <td><a href='edit.php?id={$row["user_id"]}' class='edit-btn' >edit</a></td>
-         <td><button class='delete-btn' data-id='{$row["user_id"]}'>Delete</button> </td></tr>";
+         <td><a href='view.php?id={$row["user_id"]}' class='view-btn btn btn-info' >View</a></td>
+         <td><a href='edit.php?id={$row["user_id"]}' class='edit-btn btn btn-success' >edit</a></td>
+         <td><button style='margin-top:0px; margin-bottom:0px' class='delete-btn btn btn-danger' data-id='{$row["user_id"]}'>Delete</button> </td></tr>";
     }
     $output .= "</table>";
     $records = mysqli_query($conn, $sql_count) or die("Query Unsuccessful2.");

@@ -1,5 +1,6 @@
 <?php
 session_start();
+$id = session_id();
 $message = "";
 
 include 'config.php';
@@ -22,9 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $message = "<span class='error' style='margin: 130px;'>invalid Email or Password</span>";
         }
     }
-    if (isset($_SESSION["email"])) {
+    if (isset($_SESSION["email"])&&!empty($id)){
         header("Location:datatables.php");
     }
+    include 'helper.php';
 }
 ?>
 
@@ -63,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input type="password" name="password" placeholder="enter your password" class="input form-control">
                                 <?php echo $error_password ?>
                             </div>
+                            
                         </div>
                         <div class="form-group">
                             <input type="submit" name="sub" value="login" class="btn btn-primary" style="margin-top:20px; margin-left:70px;">

@@ -1,23 +1,34 @@
 <?php
 
 session_start();
-$id=$_SESSION["id"];
+$id = session_id();
+$email = $_SESSION['email'];
 
-$con = mysqli_connect("localhost","phpmyadmin","root","phpmyadmin");
-if(!$con){
-    echo "could not connect to database";
-}else{
-    echo "database connected";
-};
 
-if(count($_POST)>0){
-    $result = mysqli_query($con,"SELECT*FROM users WHERE ='" .$id."'");
-    // echo $result;
-    // die();
-    $row = mysqli_fetch_array($result);
+include 'config.php';
+if (!isset($_SESSION['email'])) {
+    header('location:signin.php');
 }
 
+if ($_POST['submit']) {
+    $old_password = $_POST['old_password'];
+    $new_password = $_POST['new_password'];
+    $retype_password = $_POST['retype_password'];
+    $password_query = mysqli_query($con, "SELECT*FROM users where email = '$email'");
+    $password_row = mysqli_fetch_array($password_query);
+    $database_password = $password_row['password'];
 
+    if ($database_password == $old_password) {
+        if ($new_password == $retype_password) {
+            $update_pwd = mysqli_query($con, "UPDATE users set password='$new_password' where email='$email'");
+            echo "<script>alert('Update Sucessfully'); window.location='datatables.php'</script>";
+        } else {
+            echo "<script>alert('Your new and Retype Password is not match'); window.location='datatables.php'</script>";
+        }
+    } else {
+        echo "<script>alert('Your old password is wrong'); window.location='datatables.php'</script>";
+    }
+}
 
 
 ?>
@@ -41,38 +52,56 @@ if(count($_POST)>0){
     <title>Change Password</title>
 </head>
 
-<body>
+<body style="background-color:#c5e9ff;">
     <div class="container" style="margin-top:40px;">
-        <div class="form-row">
-            <div class="form-group">
-                <div class="header">
-                    <p class="horizontal-heading">Change Password</p>
-                </div>
-                <div class="changePassword">
-                    <form method="post" enctype="multipart/form-data">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="Old-password">Old Password</label>
-                                <input type="text" name="old-password" placehoder="enter your old password">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card card-outline-secondary">
+                    <div class="card-header">
+                        <h3 class="mb-1">Change Password</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data" action="">
+                            <div class="form-row">
+                                <div class="form-group row">
+                                    <label for="Old-password" class="col-lg-4 col-form-label form-control-label"
+                                        style="text-align: center;">Old Password</label>
+                                    <div class="col-lg-12">
+                                        <input type="password" name="old_password" placehoder="enter your old password"
+                                            class="form-control">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="New-password">New Password</label>
-                                <input type="text" name="new_password">
+                            <br>
+                            <div class="form-row">
+                                <div class="form-group row">
+                                    <label for="New-password" class="col-lg-4 col-form-label form-control-label"
+                                        style="text-align: center;">New Password</label>
+                                    <div class="col-lg-12">
+                                        <input type="password" name="new_password" placeholder="enter your new password"
+                                            class="form-control">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="Retype-password">Retype password</label>
-                                <input type="text" name="retype_password">
+                            <br>
+                            <div class="form-row">
+                                <div class="form-group row">
+                                    <label for="Retype-password"
+                                        class="col-lg-6 col-form-label form-control-label">Retype password</label>
+                                    <div class="col-lg-12">
+                                        <input type="password" name="retype_password"
+                                            placeholder="re-enter your password" class="form-control">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group row">
+                                    <div class="col-lg-9">
+                                        <input type="submit" value="submit" name="submit" class="btn btn-warning">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="button" value="submit" name="submit">
-                            </div>
-                        </div>
-                        
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

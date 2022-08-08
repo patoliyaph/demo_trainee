@@ -26,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nameErr = "Only letters and white space allowed";
             header("Location:signup.php?nameErr=Only letters and white space allowed");
             $error = true;
-
         }
     }
 
@@ -35,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $emailErr = "Email is required";
         header("Location:signup.php?emailErr=email is required");
         $error = true;
-
     } else {
         $_POST["email"];
 
@@ -44,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $emailErr = "Invalid email format";
             header("Location:signup.php?emailErr=Invalid email format");
             $error = true;
-
         }
         $sql1 = "SELECT * FROM user_data WHERE user_email='$email'";
         $res = mysqli_query($conn, $sql1);
@@ -54,9 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo $emailErr = "Sorry... email already taken";
             header("Location:signup.php?emailErr=Sorry... email already taken");
             $error = true;
-
         }
-
     }
 
     if (!empty($_POST["psw"]) && ($_POST["psw"] == $_POST["pswrepeat"])) {
@@ -74,7 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $cpasswordErr = "Please Check You've Entered Or Confirmed Your Password!";
             header("Location:signup.php?cpasswordErr=Please Check You've Entered Or Confirmed Your Password!");
             $error = true;
-
         }
     }
 
@@ -82,7 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dobErr = "Birth Date is Required Please";
         header("Location:signup.php?dobErr=Invalid time format");
         $error = true;
-
     } else {
         $dob = $_POST['dob'];
     }
@@ -91,11 +84,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $genderErr = "Gender is required";
         header("Location:signup.php?genderErr=Gender is required");
         $error = true;
-
     } else {
-        // $gender = $_POST['gender'];
         $gender = test_input($_POST["gender"]);
-        // header("Location:signup.php?genderErr=ERROR IN Gender");
     }
 }
 
@@ -125,20 +115,15 @@ if ($_FILES['file']['name'] != '') {
             $sql = "INSERT INTO user_data (user_name, user_email, user_password,user_dob,user_gender,user_photo)
  				VALUES ('$username', '$email', '$password', '$dob', '$gender', '$path')";
 
-            $result=mysqli_query($conn, $sql);
+            $result = mysqli_query($conn, $sql);
 
-            if($result){
+            if ($result) {
                 echo '<script>alert("record added success fully!")</script>';
                 echo '<script>window.location.href="load.php"</script>';
-
+            } else {
+                echo '<script>alert("Email alredy exist")</script>';
+                echo '<script>window.location.href="signup.php"</script>';
             }
-            else{
-            echo '<script>alert("Email alredy exist")</script>';
-            echo '<script>window.location.href="signup.php"</script>';
-            }
-            // header("Location:load.php");   
-           
-
         } else {
             echo "Not uploaded because of error #" . $_FILES["file"]["error"];
         }

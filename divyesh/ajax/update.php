@@ -1,8 +1,11 @@
 <?php
 include 'config.php';
+function isValidEmail($user_email) {
+    return filter_var($user_email, FILTER_VALIDATE_EMAIL) 
+        && preg_match('/@.+\./', $user_email);
+}
 
 if (isset($_POST['update'])) {
-
     $user_id = $_POST["userid"];
     $user_name = $_POST["username"];
     $user_email = $_POST["email"];
@@ -21,8 +24,8 @@ if (isset($_POST['update'])) {
 
     $sql = "UPDATE user_data SET user_name  = '$user_name', user_email = '$user_email',user_password = '$password', user_dob  = '$user_dob', user_gender = '$user_gender',user_photo  = '$update_file' WHERE user_id='$user_id'";
 
-    $result = mysqli_query($conn, $sql) ;
-    
+    $result = mysqli_query($conn, $sql);
+
 
     if ($result) {
         if ($_FILES['newfile']['name'] != '') {
@@ -30,10 +33,21 @@ if (isset($_POST['update'])) {
                 unlink($old_img);
             }
         }
-        echo 'update successfully';
-        header("Location:load.php");
-
+        if ($result) {
+            echo '<script type="text/javascript">';
+            echo ' alert("update successfully")';
+            echo '</script>';
+            echo '<script>
+        window.location.href = "load.php";
+        </script>';
+        }
     } else {
-        echo 'data can not be saved, please try again after some time';
+        echo '<script type="text/javascript">';
+        echo ' alert("Email alredy exist")';
+        echo '</script>';
+        echo '<script>
+        window.location.href = "load.php";
+        </script>';
+
     }
 }

@@ -12,7 +12,6 @@ $result = mysqli_query($conn, $sql) or die("query unsuccessful");
 if ($result) {
 
     echo "Record deleted successfully";
-
 } else {
     echo "deleted unsuccessfully";
 }
